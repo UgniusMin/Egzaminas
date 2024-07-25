@@ -6,6 +6,7 @@ Rename the .envexample to .env and add your MONGO_URI
 
 ```
 # Backend deps
+cd backend
 npm install
 
 # Frontend deps
