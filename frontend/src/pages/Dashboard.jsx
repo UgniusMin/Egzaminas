@@ -1,18 +1,18 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import GoalForm from '../components/GoalForm'
-import GoalItem from '../components/GoalItem'
 import Spinner from '../components/Spinner'
-import { getGoals, reset } from '../features/goals/goalSlice'
+import { getMeals, reset } from '../features/meals/mealSlice'
+import MealForm from '../components/MealForm'
+import MealItem from '../components/MealItem'
 
 function Dashboard() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const { user } = useSelector((state) => state.auth)
-  const { goals, isLoading, isError, message } = useSelector(
-    (state) => state.goals
+  const { meals, isLoading, isError, message } = useSelector(
+    (state) => state.meals
   )
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function Dashboard() {
       navigate('/login')
     }
 
-    dispatch(getGoals())
+    dispatch(getMeals())
 
     return () => {
       dispatch(reset())
@@ -39,20 +39,20 @@ function Dashboard() {
     <>
       <section className='heading'>
         <h1>Welcome {user && user.name}</h1>
-        <p>Goals Dashboard</p>
+        <p>Dienos pietų dashboard</p>
       </section>
 
-      <GoalForm />
+      <MealForm />
 
       <section className='content'>
-        {goals.length > 0 ? (
-          <div className='goals'>
-            {goals.map((goal) => (
-              <GoalItem key={goal._id} goal={goal} />
+        {meals.length > 0 ? (
+          <div className='meals'>
+            {meals.map((meal) => (
+              <MealItem key={meal._id} meal={meal} />
             ))}
           </div>
         ) : (
-          <h3>You have not set any goals</h3>
+          <h3>Jūs neturit jokių sukurtų dienos dietų</h3>
         )}
       </section>
     </>
