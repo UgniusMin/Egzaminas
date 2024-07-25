@@ -80,9 +80,6 @@ export const mealSlice = createSlice({
       .addCase(createMeal.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        console.log(state.meals)
-        state.meals = JSON.parse(JSON.stringify(state.meals))
-        console.log(state.meals)
         state.meals.push(action.payload)
       })
       .addCase(createMeal.rejected, (state, action) => {
